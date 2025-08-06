@@ -37,7 +37,7 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # Configure EAS Project (eas init) 这一步已被特意移除
+      # 删除了多余的 "Configure EAS Project" (eas init) 步骤
 
       - name: Build Android App
         env:
