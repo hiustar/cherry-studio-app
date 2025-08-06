@@ -2,7 +2,7 @@ export default {
   expo: {
     name: 'Cherry Studio',
     slug: 'cherry-studio',
-    owner: 'bakhiu', // 明确指定项目所有者为 'bakhiu'
+    owner: 'bakhiu',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './src/assets/images/favicon.png',
@@ -23,7 +23,6 @@ export default {
     },
     web: {
       bundler: 'metro',
-      // output: 'static',
       favicon: './src/assets/images/favicon.png'
     },
     plugins: [
@@ -63,7 +62,6 @@ export default {
         'expo-camera',
         {
           cameraPermission: 'Allow Cherry Studio App to access your camera',
-          // microphonePermission: 'Allow Cherry Studio App to access your microphone',
           recordAudioAndroid: true
         }
       ]
@@ -71,7 +69,12 @@ export default {
     experiments: {
       typedRoutes: true,
       reactCompiler: true
+    },
+    // 将新创建的项目 ID 添加回来
+    extra: {
+      eas: {
+        projectId: 'fe77e5cb-b610-4c6c-a309-2279655845f0'
+      }
     }
-    // 包含旧 projectId 的 "extra" 字段已被完全删除，以强制创建一个新项目
   }
 }
