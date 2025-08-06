@@ -2,6 +2,7 @@ export default {
   expo: {
     name: 'Cherry Studio',
     slug: 'cherry-studio',
+    owner: 'bakhiu',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './src/assets/images/favicon.png',
