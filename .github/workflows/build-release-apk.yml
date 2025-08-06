@@ -49,5 +49,5 @@ jobs:
       #    直接在 `eas build` 步骤中通过 `env` 提供 `EXPO_TOKEN`。
       - name: Build Android App
         env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EXPO_TOKEN: ${{ secrets.huOzauzsQ9yQcViMAF2r6V5FYfjtDGSNavU9VEGG }}
         run: eas build --platform android --profile production --non-interactive
