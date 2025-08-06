@@ -44,22 +44,15 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # 8. 初始化 EAS 项目 (这是修正后的步骤)
-      #    现在也为这个步骤提供了 EXPO_TOKEN
+      # 8. 初始化 EAS 项目 (这是最终的修正)
+      #    我们添加了 --force 标志，以允许在服务器上创建新项目
       - name: Configure EAS Project
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas init --non-interactive
+        run: eas init --non-interactive --force
 
       # 9. 构建 APK
       - name: Build Android App
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --profile production --non-interactive```
-
-### **核心改动**
-
-      - name: Configure EAS Project
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} # <--- 这是这次新增的关键修正
-        run: eas init --non-interactive
+        run: eas build --platform android --profile production --non-interactive
