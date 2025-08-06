@@ -1,3 +1,8 @@
+我是一个计算机新手，创建这个fork只为自己提前预览移动端APP
+如有侵权等行为可联系我或者通过issues联系我删除
+在此 致歉
+
+
 # 🍒 Welcome to Cherry Studio App
 
 English | [中文](./README-zh.md)
