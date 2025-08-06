@@ -11,32 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 拉取你的项目代码
+      # 1. 拉取代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 设置 Node.js 环境
+      # 2. 设置 Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # 3. 启用 Corepack (这是新增的修复步骤)
+      # 3. 启用 Corepack 以使用正确的 Yarn 版本
       - name: Enable Corepack
         run: corepack enable
 
-      # 4. 设置 Java 环境
+      # 4. 设置 Java
       - name: Set up Java Development Kit
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 5. 安装项目依赖 (现在会使用正确的 Yarn 版本)
+      # 5. 安装依赖
       - name: Install dependencies with Yarn
         run: yarn install --frozen-lockfile
 
-      # 6. 生成数据库代码
+      # 6. 生成数据库
       - name: Generate database schema
         run: npx drizzle-kit generate
 
@@ -44,10 +44,10 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # 8. 登录到 Expo 服务
-      - name: Log in to Expo
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
-
-      # 9. 使用 EAS Build 构建 APK
+      # 8. 构建 APK (这是修正后的步骤)
+      #    移除了错误的 `eas login` 步骤。
+      #    直接在 `eas build` 步骤中通过 `env` 提供 `EXPO_TOKEN`。
       - name: Build Android App
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --profile production --non-interactive
