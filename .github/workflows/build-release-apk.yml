@@ -1,0 +1,51 @@
+name: Build Android Release APK
+
+on:
+  push:
+    branches:
+      - main # 当代码推送到 main 分支时触发
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取你的项目代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 设置 Node.js 环境，Expo 项目需要
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # 建议使用 LTS 版本的 Node.js
+
+      # 3. 设置 Java 环境，Android 构建需要
+      - name: Set up Java Development Kit
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 4. 安装项目依赖 (来自你的 README)
+      - name: Install dependencies with Yarn
+        run: yarn install --frozen-lockfile
+
+      # 5. 生成数据库代码 (来自你的 README)
+      - name: Generate database schema
+        run: npx drizzle-kit generate
+
+      # 6. 安装 Expo 的构建工具 EAS CLI
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      # 7. 登录到 Expo 服务 (需要 EXPO_TOKEN)
+      - name: Log in to Expo
+        run: eas login --token ${{ secrets.EXPO_TOKEN }}
+
+      # 8. 使用 EAS Build 构建 Release APK
+      #    --platform android: 指定构建安卓平台
+      #    --profile production: 指定使用名为 'production' 的构建配置 (需要在 eas.json 中定义)
+      #    --non-interactive: 在非交互模式下运行，适用于自动化环境
+      - name: Build Android App
+        run: eas build --platform android --profile production --non-interactive
