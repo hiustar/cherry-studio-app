@@ -2,7 +2,7 @@ export default {
   expo: {
     name: 'Cherry Studio',
     slug: 'cherry-studio',
-    owner: 'bakhiu',
+    owner: 'bakhiu', // 明确指定项目所有者为 'bakhiu'
     version: '1.0.0',
     orientation: 'portrait',
     icon: './src/assets/images/favicon.png',
@@ -71,12 +71,7 @@ export default {
     experiments: {
       typedRoutes: true,
       reactCompiler: true
-    },
-    extra: {
-      eas: {
-        projectId: '80096eaf-3ad0-4b87-a466-15f04da1bacc'
-      }
     }
+    // 包含旧 projectId 的 "extra" 字段已被完全删除，以强制创建一个新项目
   }
 }
-
