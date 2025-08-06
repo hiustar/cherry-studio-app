@@ -11,47 +11,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 拉取代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 设置 Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # 3. 启用 Corepack
       - name: Enable Corepack
         run: corepack enable
 
-      # 4. 设置 Java
       - name: Set up Java Development Kit
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 5. 安装依赖
       - name: Install dependencies with Yarn
         run: yarn install --frozen-lockfile
 
-      # 6. 生成数据库
       - name: Generate database schema
         run: npx drizzle-kit generate
 
-      # 7. 安装 EAS CLI
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # 8. 初始化 EAS 项目 (这是最终的修正)
-      #    我们添加了 --force 标志，以允许在服务器上创建新项目
-      - name: Configure EAS Project
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas init --non-interactive --force
+      # Configure EAS Project (eas init) 这一步已被特意移除
 
-      # 9. 构建 APK
       - name: Build Android App
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
